@@ -97,3 +97,20 @@ class DBStorage():
         close method on the class Session
         '''
         self.__session.close()
+
+    def get(self, cls, id):
+        '''
+        Method to get a specific instance
+        '''
+        retrieved_obj = self.all(cls)
+        target_ins = cls + '.' + id
+        if target_ins in retrieved_obj:
+            return retrieved_obj[target_ins]
+        else:
+            return None
+    def count(self, cls=None):
+        '''
+        Method to return the count of instances in a specific class or
+        all the classes
+        '''
+        return len(self.all(cls))
