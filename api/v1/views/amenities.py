@@ -7,7 +7,7 @@ from api.v1.views import app_views
 
 
 @app_views.route('/amenities', strict_slashes=False, methods=['GET'])
-def all_objects():
+def all_objects_amen():
     '''
     Method for a Get request for amenity objects
     Returns: json representation of dictionary of attributes for
@@ -21,7 +21,7 @@ def all_objects():
 
 
 @app_views.route('/amenities/<amenity_id>', strict_slashes=False, methods=['GET'])
-def retrieve_by_id(amenity_id=None):
+def retrieve_by_id_amen(amenity_id=None):
     '''
     Method for Get request for amenity objects according to amenity id (variable)
     Return: retrieved instance of Amenity
@@ -36,7 +36,7 @@ def retrieve_by_id(amenity_id=None):
 
 @app_views.route('/amenities/<amenity_id>', strict_slashes=False,
                  methods=['DELETE'])
-def delete_request(amenity_id=None):
+def delete_request_amen(amenity_id=None):
     '''
     Method for Delete request for amenity objects according to
     state id (variable)
@@ -51,7 +51,7 @@ def delete_request(amenity_id=None):
 
 
 @app_views.route('/states', strict_slashes=False, methods=['POST'])
-def create_request():
+def create_request_amen():
     '''
     Method for Get request for amenity objects according to amenity id (variable)
     Return: retrieved instance of Amenity
@@ -68,7 +68,7 @@ def create_request():
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False, methods=['PUT'])
-def put_request(state_id):
+def put_request_amen(state_id):
     '''
     Method for update instance request for amenity objects
     according to amenity id (variable)

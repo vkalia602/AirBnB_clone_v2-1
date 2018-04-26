@@ -7,7 +7,7 @@ from api.v1.views import app_views
 
 
 @app_views.route('/places/<place_id>/reviews', strict_slashes=False, methods=['GET'])
-def all_objects():
+def all_objects_place_rev():
     '''
     Method for a Get request for place objects
     Returns: json representation of dictionary of attributes for
@@ -25,7 +25,7 @@ def all_objects():
 
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False, methods=['GET'])
-def retrieve_by_id(review_id=None):
+def retrieve_by_id_place_rev(review_id=None):
     '''
     Method for Get request for review objects according to user id (variable)
     Return: retrieved instance of review
@@ -39,7 +39,7 @@ def retrieve_by_id(review_id=None):
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False,
                  methods=['DELETE'])
-def delete_request(place_id=None):
+def delete_request_place_rev(place_id=None):
     '''
     Method for Delete request for review objects according to
     review id (variable)
@@ -54,7 +54,7 @@ def delete_request(place_id=None):
 
 
 @app_views.route('/places/<place_id>/reviews', strict_slashes=False, methods=['POST'])
-def create_request():
+def create_request_place_rev():
     '''
     Method for Get request for review objects according to place id (variable)
     Return: retrieved instance of Review
@@ -77,7 +77,7 @@ def create_request():
 
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False, methods=['PUT'])
-def put_request(review_id):
+def put_request_place_rev(review_id):
     '''
     Method for update instance request for review objects
     according to review id (variable)

@@ -7,7 +7,7 @@ from api.v1.views import app_views
 
 
 @app_views.route('/users', strict_slashes=False, methods=['GET'])
-def all_objects():
+def all_objects_user():
     '''
     Method for a Get request for user objects
     Returns: json representation of dictionary of attributes for
@@ -21,7 +21,7 @@ def all_objects():
 
 
 @app_views.route('/users/<user_id>', strict_slashes=False, methods=['GET'])
-def retrieve_by_id(user_id=None):
+def retrieve_by_id_user(user_id=None):
     '''
     Method for Get request for user objects according to user id (variable)
     Return: retrieved instance of User
@@ -36,7 +36,7 @@ def retrieve_by_id(user_id=None):
 
 @app_views.route('/users/<user_id>', strict_slashes=False,
                  methods=['DELETE'])
-def delete_request(user_id=None):
+def delete_request_user(user_id=None):
     '''
     Method for Delete request for user objects according to
     user id (variable)
@@ -51,7 +51,7 @@ def delete_request(user_id=None):
 
 
 @app_views.route('/users', strict_slashes=False, methods=['POST'])
-def create_request():
+def create_request_user():
     '''
     Method for Get request for user objects according to user id (variable)
     Return: retrieved instance of Amenity
@@ -70,7 +70,7 @@ def create_request():
 
 
 @app_views.route('/users/<user_id>', strict_slashes=False, methods=['PUT'])
-def put_request(user_id):
+def put_request_user(user_id):
     '''
     Method for update instance request for user objects
     according to user id (variable)
