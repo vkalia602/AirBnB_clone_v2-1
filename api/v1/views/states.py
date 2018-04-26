@@ -85,7 +85,7 @@ def put_request(state_id):
             put_reqs.pop('id', None)
             for key, value in put_reqs.items():
                 setattr(state, key, value)
-                state.save()
+            state.save()
             return (jsonify(state.to_dict()), 200)
         except:
             abort(404)

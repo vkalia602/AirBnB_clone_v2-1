@@ -85,7 +85,7 @@ def put_request(state_id):
             put_reqs.pop('id', None)
             for key, value in put_reqs.items():
                 setattr(amenity, key, value)
-                amenity.save()
+            amenity.save()
             return (jsonify(amenity.to_dict()), 200)
         except:
             abort(404)

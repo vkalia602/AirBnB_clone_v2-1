@@ -88,7 +88,7 @@ def put_request(user_id):
             put_reqs.pop('email', None)
             for key, value in put_reqs.items():
                 setattr(user, key, value)
-                user.save()
+            user.save()
             return (jsonify(user.to_dict()), 200)
         except:
             abort(404)

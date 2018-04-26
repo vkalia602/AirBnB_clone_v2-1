@@ -96,7 +96,7 @@ def put_request(review_id):
             put_reqs.pop('place_id', None)
             for key, value in put_reqs.items():
                 setattr(review, key, value)
-                review.save()
+            review.save()
             return (jsonify(review.to_dict()), 200)
         except:
             abort(404)

@@ -96,7 +96,7 @@ def put_request(place_id):
             put_reqs.pop('city_id', None)
             for key, value in put_reqs.items():
                 setattr(place, key, value)
-                place.save()
+            place.save()
             return (jsonify(place.to_dict()), 200)
         except:
             abort(404)
