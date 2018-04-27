@@ -46,7 +46,7 @@ def delete_request_place(place_id=None):
     place id (variable)
     Return: Empty dictionary
     '''
-    ret_obj = storage.get("User", place_id)
+    ret_obj = storage.get("Place", place_id)
     if ret_obj is None:
         abort(404)
     else:
