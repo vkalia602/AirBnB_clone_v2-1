@@ -8,8 +8,8 @@ from flask import Flask, jsonify, make_response
 from api.v1.views import app_views
 import os
 app = Flask(__name__)
-host = os.getnev('HBNB_API_HOST', default='0.0.0.0')
-port = int(os.getnev('HBNB_API_PORT', default='5000'))
+host = os.getenv('HBNB_API_HOST', default='0.0.0.0')
+port = int(os.getenv('HBNB_API_PORT', default='5000'))
 app.register_blueprint(app_views)
 
 
