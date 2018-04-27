@@ -85,19 +85,18 @@ def update_city(city_id):
     '''
     put_reqs = request.get_json()
     ret_city = storage.get("City", city_id)
+    if ret_city is None:
+        abort(404)
     if put_reqs is None:
         return jsonify({"error": "Not a JSON"}), 400
     else:
-        try:
-            put_reqs.pop('updated_at', None)
-            put_reqs.pop('created_at', None)
-            put_reqs.pop('id', None)
-            for key, value in put_reqs.items():
-                setattr(state, key, value)
-            ret_city.save()
-            return (jsonify(state.to_dict()), 200)
-        except:
-            abort(404)
+        put_reqs.pop('updated_at', None)
+        put_reqs.pop('created_at', None)
+        put_reqs.pop('id', None)
+        for key, value in put_reqs.items():
+            setattr(ret_city, key, value)
+        ret_city.save()
+        return (jsonify(ret_city.to_dict()), 200)
 
 if __name__ == '__main__':
     pass
