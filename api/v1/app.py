@@ -14,6 +14,7 @@ port = int(os.getenv('HBNB_API_PORT', default='5000'))
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/*": {"origins": "0.0.0.0"}})
 
+
 @app.teardown_appcontext
 def close_dat_sess(exception):
     '''
