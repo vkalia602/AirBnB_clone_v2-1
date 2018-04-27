@@ -73,6 +73,7 @@ def create_request_place(c_id):
     if city is None or user is None:
         abort(404)
     else:
+        post_reqs['city_id'] = c_id
         new_instance = classes["Place"](**post_reqs)
         new_instance.save()
         return jsonify(new_instance.to_dict()), 201
