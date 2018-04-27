@@ -21,7 +21,6 @@ def all_objects_place(c_id):
     city_in_places = []
     for key, value in all_places.items():
         if value.city_id == c_id:
-            print(key)
             city_in_places.append(value.to_dict())
     return (jsonify(city_in_places))
 
@@ -87,22 +86,21 @@ def put_request_place(place_id):
     Return: retrieved instance of User
     '''
     put_reqs = request.get_json()
-    place = storage.get("Place", place_id)
     if put_reqs is None:
         return jsonify({"error": "Not a JSON"}), 400
+    ret_place = storage.get("Place", place_id)
+    if place is None:
+        abort(404)
     else:
-        try:
-            put_reqs.pop('updated_at', None)
-            put_reqs.pop('created_at', None)
-            put_reqs.pop('id', None)
-            put_reqs.pop('user_id', None)
-            put_reqs.pop('city_id', None)
-            for key, value in put_reqs.items():
-                setattr(place, key, value)
-            place.save()
-            return (jsonify(place.to_dict()), 200)
-        except:
-            abort(404)
+        put_reqs.pop('updated_at', None)
+        put_reqs.pop('created_at', None)
+        put_reqs.pop('id', None)
+        put_reqs.pop('user_id', None)
+        put_reqs.pop('city_id', None)
+        for key, value in put_reqs.items():
+            setattr(ret_place, key, value)
+        ret_place.save()
+        return (jsonify(ret_place.to_dict()), 200)
 
 if __name__ == '__main__':
     pass
