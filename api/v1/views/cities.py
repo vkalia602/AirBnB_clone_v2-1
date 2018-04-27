@@ -94,7 +94,7 @@ def update_city(city_id):
             put_reqs.pop('id', None)
             for key, value in put_reqs.items():
                 setattr(state, key, value)
-                ret_city.save()
+            ret_city.save()
             return (jsonify(state.to_dict()), 200)
         except:
             abort(404)
