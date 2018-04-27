@@ -1,4 +1,4 @@
-#!/usr/bin/python3                                                                                                                                                                                        
+#!/usr/bin/python3
 '''Module to render Place Reviews related information'''
 
 from flask import request, jsonify, abort
@@ -6,8 +6,9 @@ from models import storage, classes
 from api.v1.views import app_views
 
 
-@app_views.route('/places/<place_id>/reviews', strict_slashes=False, methods=['GET'])
-def all_objects_place_rev():
+@app_views.route('/places/<place_id>/reviews', strict_slashes=False,
+                 methods=['GET'])
+def all_objects_place_rev(place_id):
     '''
     Method for a Get request for place objects
     Returns: json representation of dictionary of attributes for
@@ -16,11 +17,11 @@ def all_objects_place_rev():
     ret_obj = storage.get("Place", place_id)
     if ret_obj is None:
         abort(404)
-    all_places = storage.all('Reviews')
+    all_places = storage.all('Review')
     review_list = []
     for key, value in all_places.items():
-        if value.place.id == place_id:
-            review_list.append(value.to_json())
+        if value.place_id == place_id:
+            review_list.append(value.to_dict())
     return (jsonify(review_list))
 
 
@@ -31,7 +32,7 @@ def retrieve_by_id_place_rev(review_id=None):
     Return: retrieved instance of review
     '''
     ret_obj = storage.get("Review", review_id)
-    if ret_user is None:
+    if ret_obj is None:
         abort(404)
     else:
         return jsonify(ret_obj.to_dict())
@@ -39,7 +40,7 @@ def retrieve_by_id_place_rev(review_id=None):
 
 @app_views.route('/reviews/<review_id>', strict_slashes=False,
                  methods=['DELETE'])
-def delete_request_place_rev(place_id=None):
+def delete_request_place_rev(review_id=None):
     '''
     Method for Delete request for review objects according to
     review id (variable)
@@ -53,8 +54,9 @@ def delete_request_place_rev(place_id=None):
         return jsonify({}), 200
 
 
-@app_views.route('/places/<place_id>/reviews', strict_slashes=False, methods=['POST'])
-def create_request_place_rev():
+@app_views.route('/places/<place_id>/reviews', strict_slashes=False,
+                 methods=['POST'])
+def create_request_place_rev(place_id):
     '''
     Method for Get request for review objects according to place id (variable)
     Return: retrieved instance of Review
