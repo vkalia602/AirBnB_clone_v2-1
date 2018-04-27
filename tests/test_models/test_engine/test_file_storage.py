@@ -9,8 +9,10 @@ import json
 import sys
 import io
 import unittest
+import models
 from models.base_model import BaseModel
 from models.state import State
+from models.user import User
 from models.engine.file_storage import FileStorage
 from console import HBNBCommand
 
@@ -152,3 +154,48 @@ class testFileStorage(unittest.TestCase):
             json_dict = json.load(fd)
         for key, value in json_dict.items():
             self.assertTrue(value['id'] != my_id)
+
+    def test_count_all(self):
+        """
+        tests count method for all objects
+        """
+        objs_all = models.storage.all()
+        count = models.storage.count()
+        self.assertEqual(len(objs_all), count)
+
+    def test_count_users(self):
+        """
+        tests count for all users 
+        """
+        obs_users = models.storage.all('User')
+        count = models.storage.count('User')
+        self.assertEqual(len(obs_users), count)
+
+    def test_count_states(self):
+        """
+        tests count for all states
+        """
+        obs_states = models.storage.all('State')
+        count = models.storage.count('State')
+        self.assertEqual(len(obs_states), count)
+
+    def test_get_user(self):
+        """
+        tests get method
+        """
+        user = User(email="kevin@holberton.com", password="kevpwd",
+                    first_name="kevin", last_name="clauson")
+        user.save()
+        user_id = user.id
+        get_user = models.storage.get('User', user_id)
+        self.assertEqual(user, get_user)
+
+    def test_get_state(self):
+        """
+        tests get method
+        """
+        state = State(name="New Hampshire")
+        state.save()
+        state_id = state.id
+        get_state = models.storage.get('State', state_id)
+        self.assertEqual(state, get_state)
