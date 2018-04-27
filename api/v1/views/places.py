@@ -89,7 +89,7 @@ def put_request_place(place_id):
     if put_reqs is None:
         return jsonify({"error": "Not a JSON"}), 400
     ret_place = storage.get("Place", place_id)
-    if place is None:
+    if ret_place is None:
         abort(404)
     else:
         put_reqs.pop('updated_at', None)
