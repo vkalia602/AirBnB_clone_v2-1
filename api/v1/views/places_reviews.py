@@ -77,31 +77,30 @@ def create_request_place_rev(place_id):
         new_instance.save()
         return jsonify(new_instance.to_dict()), 201
 
-
+'''
 @app_views.route('/reviews/<review_id>', strict_slashes=False, methods=['PUT'])
 def put_request_place_rev(review_id):
-    '''
+
     Method for update instance request for review objects
     according to review id (variable)
     Return: retrieved instance of Review
-    '''
+
     put_reqs = request.get_json()
     review = storage.get("Review", review_id)
+    if review is None:
+        abort(404)
     if put_reqs is None:
         return jsonify({"error": "Not a JSON"}), 400
     else:
-        try:
-            put_reqs.pop('updated_at', None)
-            put_reqs.pop('created_at', None)
-            put_reqs.pop('id', None)
-            put_reqs.pop('user_id', None)
-            put_reqs.pop('place_id', None)
-            for key, value in put_reqs.items():
-                setattr(review, key, value)
-            review.save()
-            return (jsonify(review.to_dict()), 200)
-        except:
-            abort(404)
-
+        put_reqs.pop('updated_at', None)
+        put_reqs.pop('created_at', None)
+        put_reqs.pop('id', None)
+        put_reqs.pop('user_id', None)
+        put_reqs.pop('place_id', None)
+        for key, value in put_reqs.items():
+            setattr(review, key, value)
+        review.save()
+        return (jsonify(review.to_dict()), 200)
+'''
 if __name__ == '__main__':
     pass
