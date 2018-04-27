@@ -37,15 +37,15 @@ def retrieve_by_id_place_rev(review_id=None):
     else:
         return jsonify(ret_obj.to_dict())
 
-'''
+
 @app_views.route('/reviews/<review_id>', strict_slashes=False,
                  methods=['DELETE'])
 def delete_request_place_rev(review_id=None):
-
+    '''
     Method for Delete request for review objects according to
     review id (variable)
     Return: Empty dictionary
-
+    '''
     ret_obj = storage.get("Review", review_id)
     if ret_obj is None:
         abort(404)
@@ -53,7 +53,7 @@ def delete_request_place_rev(review_id=None):
         storage.delete(ret_obj)
         return jsonify({}), 200
 
-'''
+
 @app_views.route('/places/<place_id>/reviews', strict_slashes=False,
                  methods=['POST'])
 def create_request_place_rev(place_id):
@@ -73,6 +73,7 @@ def create_request_place_rev(place_id):
     if place is None or user is None:
         abort(404)
     else:
+        post_reqs['place_id'] = place_id
         new_instance = classes["Review"](**post_reqs)
         new_instance.save()
         return jsonify(new_instance.to_dict()), 201
