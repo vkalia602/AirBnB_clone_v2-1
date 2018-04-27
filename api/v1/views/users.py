@@ -1,4 +1,4 @@
-#!/usr/bin/python3                                                                                                                                                                                        
+#!/usr/bin/python3
 '''Module to render User related information'''
 
 from flask import request, jsonify, abort

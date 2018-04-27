@@ -6,7 +6,6 @@ from models import storage, classes, City
 from api.v1.views import app_views
 
 
-
 @app_views.route('/states/<state_id>/cities', strict_slashes=False,
                  methods=['GET'])
 def retrieve_all_cities(state_id=None):
@@ -23,6 +22,7 @@ def retrieve_all_cities(state_id=None):
         for obj in all_cities:
             city_list.append(obj.to_dict())
         return jsonify(city_list)
+
 
 @app_views.route('/cities/<city_id>', strict_slashes=False, methods=['GET'])
 def city_with_id(city_id):

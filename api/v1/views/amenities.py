@@ -1,4 +1,4 @@
-#!/usr/bin/python3                                                                                                                                                                                        
+#!/usr/bin/python3
 '''Module to render Amenity related information'''
 
 from flask import request, jsonify, abort
@@ -11,19 +11,22 @@ def all_objects_amen():
     '''
     Method for a Get request for amenity objects
     Returns: json representation of dictionary of attributes for
-    all instances in amenity                                                                                                                                                                        
+    all instances in amenity
     '''
+
     amenities_dict = storage.all("Amenity")
     amenities_list = []
-    for key, value in states_dict.items():
+    for key, value in amenities_dict.items():
         amenities_list.append(value.to_dict())
     return (jsonify(amenities_list))
 
 
-@app_views.route('/amenities/<amenity_id>', strict_slashes=False, methods=['GET'])
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False,
+                 methods=['GET'])
 def retrieve_by_id_amen(amenity_id=None):
     '''
-    Method for Get request for amenity objects according to amenity id (variable)
+    Method for Get request for amenity objects according to amenity
+    id (variable)
     Return: retrieved instance of Amenity
     '''
 
@@ -50,10 +53,11 @@ def delete_request_amen(amenity_id=None):
         return jsonify({}), 200
 
 
-@app_views.route('/states', strict_slashes=False, methods=['POST'])
+@app_views.route('/amenities', strict_slashes=False, methods=['POST'])
 def create_request_amen():
     '''
-    Method for Get request for amenity objects according to amenity id (variable)
+    Method for Get request for amenity objects according to amenity id
+    (variable)
     Return: retrieved instance of Amenity
     '''
     post_reqs = request.get_json()
@@ -67,8 +71,9 @@ def create_request_amen():
         return jsonify(new_instance.to_dict()), 201
 
 
-@app_views.route('/states/<state_id>', strict_slashes=False, methods=['PUT'])
-def put_request_amen(state_id):
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False,
+                 methods=['PUT'])
+def put_request_amen(amenity_id):
     '''
     Method for update instance request for amenity objects
     according to amenity id (variable)

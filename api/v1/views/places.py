@@ -1,4 +1,4 @@
-#!/usr/bin/python3                                                                                                                                                                                        
+#!/usr/bin/python3
 '''Module to render Place related information'''
 
 from flask import request, jsonify, abort
@@ -6,21 +6,23 @@ from models import storage, classes
 from api.v1.views import app_views
 
 
-@app_views.route('/cities/<city_id>/places', strict_slashes=False, methods=['GET'])
-def all_objects_place():
+@app_views.route('/cities/<c_id>/places', strict_slashes=False,
+                 methods=['GET'])
+def all_objects_place(c_id):
     '''
     Method for a Get request for place objects
     Returns: json representation of dictionary of attributes for
     all instances in place
     '''
-    ret_obj = storage.get("City", city_id)
+    ret_obj = storage.get("City", c_id)
     if ret_obj is None:
         abort(404)
     all_places = storage.all('Place')
     city_in_places = []
     for key, value in all_places.items():
-        if value.city.id == city_id:
-            city_in_places.append(value.to_json())
+        if value.city_id == c_id:
+            print(key)
+            city_in_places.append(value.to_dict())
     return (jsonify(city_in_places))
 
 
@@ -31,7 +33,7 @@ def retrieve_by_id_place(place_id=None):
     Return: retrieved instance of User
     '''
     ret_obj = storage.get("Place", place_id)
-    if ret_user is None:
+    if ret_obj is None:
         abort(404)
     else:
         return jsonify(ret_obj.to_dict())
@@ -53,8 +55,9 @@ def delete_request_place(place_id=None):
         return jsonify({}), 200
 
 
-@app_views.route('/cities/<city_id>/places', strict_slashes=False, methods=['POST'])
-def create_request_place():
+@app_views.route('/cities/<c_id>/places', strict_slashes=False,
+                 methods=['POST'])
+def create_request_place(c_id):
     '''
     Method for Get request for place objects according to city id (variable)
     Return: retrieved instance of Place
@@ -66,7 +69,7 @@ def create_request_place():
         return jsonify({"error": "Missing user_id"}), 400
     elif "name" not in post_reqs:
         return jsonify({"error": "Missing name"}), 400
-    city = storage.get("City", city_id)
+    city = storage.get("City", c_id)
     user = storage.get("User", post_reqs["user_id"])
     if city is None or user is None:
         abort(404)
