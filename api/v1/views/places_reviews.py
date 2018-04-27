@@ -53,14 +53,14 @@ def delete_request_place_rev(review_id=None):
         storage.delete(ret_obj)
         return jsonify({}), 200
 
-
+'''
 @app_views.route('/places/<place_id>/reviews', strict_slashes=False,
                  methods=['POST'])
 def create_request_place_rev(place_id):
-    '''
+
     Method for Get request for review objects according to place id (variable)
     Return: retrieved instance of Review
-    '''
+
     post_reqs = request.get_json()
     if post_reqs is None:
         return jsonify({"error": "Not a JSON"}), 400
@@ -76,15 +76,15 @@ def create_request_place_rev(place_id):
         new_instance = classes["Review"](**post_reqs)
         new_instance.save()
         return jsonify(new_instance.to_dict()), 201
-
 '''
+
 @app_views.route('/reviews/<review_id>', strict_slashes=False, methods=['PUT'])
 def put_request_place_rev(review_id):
-
+    '''
     Method for update instance request for review objects
     according to review id (variable)
     Return: retrieved instance of Review
-
+    '''
     put_reqs = request.get_json()
     review = storage.get("Review", review_id)
     if review is None:
@@ -101,6 +101,6 @@ def put_request_place_rev(review_id):
             setattr(review, key, value)
         review.save()
         return (jsonify(review.to_dict()), 200)
-'''
+
 if __name__ == '__main__':
     pass
